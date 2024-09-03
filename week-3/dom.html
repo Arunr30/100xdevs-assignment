@@ -8,6 +8,8 @@
     <body>
         <input type="text" />
         <button onclick="addTodo()">add todo</button>
+        <button onclick="deleteLast()">Delete Last</button>
+        <button onclick="deleteFirst()">Delete First</button>
         <div id="todos"></div>
     </body>
     <script>
@@ -19,8 +21,24 @@
             render()
         }
 
+        function deleteFirst() {
+            todos.splice(0, 1)
+            // render()
+        }
+
+        function deleteLast() {
+            todos.splice(todos.length - 1, 1)
+            render()
+        }
+
         function createTodoElement(todo) {
             document.querySelector('input').value = ''
+            const inputEl = document.querySelector('input').value
+            if (inputEl.trim() === '') {
+                alert('Please enter a todo!!!')
+                return
+            }
+
             const divEl = document.createElement('div')
 
             const h3El = document.createElement('h3')

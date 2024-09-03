@@ -28,3 +28,41 @@ body {
     text-decoration: underline;
     color: black;
 }
+
+.navbar-toggle {
+    display: none;
+}
+
+.side-navbar {
+    background-color: black;
+    width: 50%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    color: white;
+    display: none;
+}
+
+.side-navbar-link {
+    margin-bottom: 30px;
+}
+.side-navbar-link a {
+    color: white;
+    text-decoration: none;
+}
+
+.side-navbar-link a:hover {
+    text-decoration: underline;
+}
+/*media queries*/
+
+@media screen and (max-width: 600px) {
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-links {
+        display: none;
+    }
+}

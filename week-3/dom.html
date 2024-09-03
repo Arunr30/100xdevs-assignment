@@ -20,9 +20,11 @@
         }
 
         function createTodoElement(todo) {
-            const inputEl = document.querySelector('input').value
+            document.querySelector('input').value = ''
             const divEl = document.createElement('div')
+
             const h3El = document.createElement('h3')
+            h3El.style.color = 'red'
             const deletebtn = document.createElement('button')
             h3El.innerHTML = todo.title
             deletebtn.innerHTML = 'delete todo!'
@@ -30,6 +32,7 @@
             deletebtn.addEventListener('click', (event) => {
                 if (event.target.id === 'del-btn') {
                     divEl.remove()
+                    todos = todos.filter((t) => t !== todo)
                 }
             })
             divEl.append(h3El)

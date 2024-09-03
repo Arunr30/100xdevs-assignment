@@ -8,28 +8,40 @@
     <body>
         <input type="text" />
         <button onclick="addTodo()">add todo</button>
+        <div id="todos"></div>
     </body>
     <script>
-        let ctr = 0
-        function deleteTodo(index) {
-            const deleteEl = document.getElementById(index)
-            deleteEl.parentNode.removeChild(deleteEl)
+        let todos = []
+        function addTodo() {
+            todos.push({
+                title: document.querySelector('input').value,
+            })
+            render()
         }
 
-        function addTodo() {
-            const inputEl = document.querySelector('input')
-            const value = inputEl.value
-
+        function createTodoElement(todo) {
+            const inputEl = document.querySelector('input').value
             const divEl = document.createElement('div')
-            divEl.setAttribute('id', ctr)
-            divEl.innerHTML =
-                '<div>' +
-                value +
-                '</div> <button onclick = "deleteTodo(' +
-                ctr +
-                ')"> delete </delete>'
-            document.querySelector('body').appendChild(divEl)
-            ctr = ctr + 1
+            const h3El = document.createElement('h3')
+            const deletebtn = document.createElement('button')
+            h3El.innerHTML = todo.title
+            deletebtn.innerHTML = 'delete todo!'
+            deletebtn.setAttribute('id', 'del-btn')
+            deletebtn.addEventListener('click', (event) => {
+                if (event.target.id === 'del-btn') {
+                    divEl.remove()
+                }
+            })
+            divEl.append(h3El)
+            divEl.append(deletebtn)
+            return divEl
+        }
+        function render() {
+            document.querySelector('#todos').innerHTML = ''
+            for (let i = 0; i < todos.length; i++) {
+                const element = createTodoElement(todos[i])
+                document.querySelector('#todos').appendChild(element)
+            }
         }
     </script>
 </html>

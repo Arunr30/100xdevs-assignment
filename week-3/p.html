@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <input type="text" name="" id="" />
+        <button onclick="hi()">add</button>
+    </body>
+    <script>
+        function hi() {
+            const input = document.querySelector('input').value
+            const divEl = document.createElement('div')
+            const h4 = document.createElement('h4')
+            h4.innerHTML = input
+            const btn = document.createElement('button')
+            btn.innerHTML = 'delete'
+            divEl.append(btn)
+            divEl.append(h4)
+            document.querySelector('body').appendChild(divEl)
+        }
+    </script>
+</html>

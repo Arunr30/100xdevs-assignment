@@ -61,7 +61,9 @@ app.delete('/', function (req, res) {
     }
 
     users[0].Kidneys = newKidneys
-    res.json({})
+    res.status(411).json({
+        msg: 'No un healthy hearts',
+    })
 })
 
 app.listen(3000)

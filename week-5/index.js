@@ -1,40 +1,17 @@
-const express = require("express");
+const express = require('express')
+const cors = require('cors')
+const app = express()
 
-const app = express();
+app.use(express.json())
+app.use(cors())
 
-function logicHandler() {}
+app.post('/sum', function (req, res) {
+    const a = parseInt(req.body.a)
+    const b = parseInt(req.body.b)
 
-app.get("/sum", function (req, res) {
-  const a = req.query.a;
-  const b = req.query.b;
+    res.json({
+        answer: a + b,
+    })
+})
 
-  res.json({
-    ans: a + b,
-  });
-});
-
-app.get("/multiply", function (req, res) {
-  const a = req.query.a;
-  const b = req.query.b;
-  res.json({
-    ans: a * b,
-  });
-});
-
-app.get("/divide", function (req, res) {
-  const a = req.query.a;
-  const b = req.query.b;
-  res.json({
-    ans: a / b,
-  });
-});
-
-app.get("/subtract", function (req, res) {
-  const a = req.query.a;
-  const b = req.query.b;
-  res.json({
-    ans: a - b,
-  });
-});
-
-app.listen(3000);
+app.listen(3000)

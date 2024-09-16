@@ -1,22 +1,37 @@
 const express = require("express");
+
 const app = express();
 
-function allow(req, res, next) {
-  const age = req.query.age;
-  if (age > 18) {
-    next();
-  } else {
-    res.json({
-      msg: "you are fucked!",
-    });
-  }
-}
+app.get("/sum", function (req, res) {
+  const a = req.query.a;
+  const b = req.query.b;
 
-app.use(allow);
-
-app.get("/", function (req, res) {
   res.json({
-    msg: "all set",
+    ans: a + b,
+  });
+});
+
+app.get("/multiply", function (req, res) {
+  const a = req.query.a;
+  const b = req.query.b;
+  res.json({
+    ans: a * b,
+  });
+});
+
+app.get("/divide", function (req, res) {
+  const a = req.query.a;
+  const b = req.query.b;
+  res.json({
+    ans: a / b,
+  });
+});
+
+app.get("/subtract", function (req, res) {
+  const a = req.query.a;
+  const b = req.query.b;
+  res.json({
+    ans: a - b,
   });
 });
 

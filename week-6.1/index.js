@@ -7,6 +7,10 @@ app.use(express.json())
 
 let users = []
 
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html')
+})
+
 app.post('/signup', (req, res) => {
     const username = req.body.username
     const password = req.body.password
@@ -35,7 +39,7 @@ app.post('/signin', (req, res) => {
     } else {
         const token = jwt.sign(
             {
-                username,
+                username: username,
             },
             JWT_SECRET
         )
@@ -59,9 +63,8 @@ function auth(req, res, next) {
         })
     }
 }
-app.use(auth)
 
-app.get('/me', (req, res) => {
+app.get('/me', auth, (req, res) => {
     const user = users.find((u) => u.username === req.username)
     if (user) {
         res.json({

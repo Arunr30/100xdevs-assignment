@@ -4,7 +4,7 @@ const ObjectId = mongoose.ObjectId;
 
 const Users = new Schema({
     name : String,
-    email : String,
+    email : {type : String, unique : true},
     password : String
 })
 
@@ -17,7 +17,8 @@ const Todos = new Schema({
 const UserModel = mongoose.model('users', Users)
 const TodoModel = mongoose.model('todos', Todos)
 
-module.exports({
-    UserModel : UserModel,
-    TodoModel : TodoModel
-})
+
+module.exports = {
+    UserModel,
+    TodoModel
+}

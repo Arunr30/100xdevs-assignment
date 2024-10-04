@@ -11,9 +11,7 @@ app.use('/api/v1/admin', adminRouter)
 
 async function main() {
     try {
-        await mongoose.connect(
-            'mongodb+srv://arunvasur:WGgxms36fZSYRbzt@cluster0.cqc6n.mongodb.net/course-app'
-        )
+        await mongoose.connect()
         app.listen('3000')
         console.log('port is listeneing to 3000')
     } catch (e) {

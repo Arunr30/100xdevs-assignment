@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken')
 const { JWT_ADMIN_PASSWORD } = require('../config')
 
-function AdminMiddleware(req, res, next) {
+function adminMiddleware(req, res, next) {
     const token = req.headers.token
     const decodedString = jwt.verify(token, JWT_ADMIN_PASSWORD)
 
     if (decodedString) {
-        req.id = decodedString.id
+        req.userId = decodedString.id
         next()
     } else {
         res.status(403).send({
@@ -16,5 +16,5 @@ function AdminMiddleware(req, res, next) {
 }
 
 module.exports = {
-    AdminMiddleware: AdminMiddleware,
+    adminMiddleware: adminMiddleware,
 }

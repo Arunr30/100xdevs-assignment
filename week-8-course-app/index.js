@@ -1,9 +1,11 @@
 const express = require('express')
-const { userRoute } = require('./routes/user')
+const { userRouter } = require('./routes/user')
 const { courseRouter } = require('./routes/course')
+const { adminRouter } = require('./routes/admin')
 const app = express() // instance
 
-app.use('/user', userRoute)
-app.use('/course', courseRouter)
+app.use('/api/v1/user', userRouter)
+app.use('/api/v1/course', courseRouter)
+app.use('/api/v1/admin', adminRouter)
 
 app.listen(3000)

@@ -10,10 +10,14 @@ app.use('/api/v1/course', courseRouter)
 app.use('/api/v1/admin', adminRouter)
 
 async function main() {
-    await mongoose.connect(
-        'mongodb+srv://arunvasur:WGgxms36fZSYRbzt@cluster0.cqc6n.mongodb.net/course-app'
-    )
-    app.listen('3000')
-    console.log('port is listeneing to 3000')
+    try {
+        await mongoose.connect(
+            'mongodb+srv://arunvasur:WGgxms36fZSYRbzt@cluster0.cqc6n.mongodb.net/course-app'
+        )
+        app.listen('3000')
+        console.log('port is listeneing to 3000')
+    } catch (e) {
+        console.error('Error connecting to db :', e)
+    }
 }
 main()

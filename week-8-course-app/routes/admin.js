@@ -14,13 +14,13 @@ adminRouter.post('/signin', (req, res) => {
     })
 })
 
-adminRouter.put('/update', (req, res) => {
+adminRouter.put('/', (req, res) => {
     res.json({
         msg: 'update',
     })
 })
 
-adminRouter.get('/preview', (req, res) => {
+adminRouter.get('/', (req, res) => {
     res.json({
         msg: 'preview',
     })

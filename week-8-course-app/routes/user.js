@@ -3,8 +3,8 @@ const userRouter = Router()
 const { z } = require('zod')
 const bycrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const JWT_USER_PASSWORD = 'ilovemrunal'
 const { userModel } = require('../db')
+const { JWT_USER_PASSWORD } = require('../config')
 
 userRouter.post('/signup', async (req, res) => {
     const requiredBody = z.object({

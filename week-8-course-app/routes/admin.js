@@ -1,9 +1,9 @@
 const { Router } = require('express')
 const jwt = require('jsonwebtoken')
-const JWT_ADMIN_PASSWORD = 'myLovemrunal'
 const { z } = require('zod')
 const bycrypt = require('bcrypt')
 const { adminModel } = require('../db')
+const { JWT_ADMIN_PASSWORD } = require('../config')
 const adminRouter = Router()
 
 adminRouter.post('/signup', async (req, res) => {
@@ -66,7 +66,11 @@ adminRouter.post('/signin', async (req, res) => {
     }
 })
 
-adminRouter.put('/', async (req, res) => {})
+adminRouter.put('/', async (req, res) => {
+    res.json({
+        msg: 'updated',
+    })
+})
 
 adminRouter.get('/', (req, res) => {
     res.json({

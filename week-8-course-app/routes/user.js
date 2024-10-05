@@ -3,7 +3,7 @@ const userRouter = Router()
 const { z } = require('zod')
 const bycrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { userModel } = require('../db')
+const { userModel, purchaseModel, courseModel } = require('../db')
 const { JWT_USER_PASSWORD } = require('../config')
 
 userRouter.post('/signup', async (req, res) => {
@@ -66,9 +66,21 @@ userRouter.post('/signin', async (req, res) => {
     }
 })
 
-userRouter.post('/purchase', (req, res) => {
+userRouter.get('/purchase', async (req, res) => {
+    const userId = req.userId
+
+    const purchases = await purchaseModel.find({
+        userId,
+    })
+
+    console.log(purchases)
+    const purchaseData = await courseModel.find({
+        _id: { $in: purchases.map((x) => x.courseId) },
+    })
+    console.log(purchaseData)
     res.json({
-        msg: 'want top buy',
+        purchases,
+        purchaseData,
     })
 })
 

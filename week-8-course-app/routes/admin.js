@@ -85,14 +85,39 @@ adminRouter.post('/', adminMiddleware, async (req, res) => {
     })
 })
 
-adminRouter.put('/', (req, res) => {
+adminRouter.put('/', adminMiddleware, async (req, res) => {
+    const adminId = req.userId
+    const { title, description, imageUrl, price, courseId } = req.body
+
+    const course = await courseModel.updateOne(
+        {
+            _id: courseId,
+            creatorId: adminId,
+        },
+        {
+            title,
+            description,
+            imageUrl,
+            price,
+        }
+    )
+    if (!course) {
+        return res.status(403).send('course not found')
+    }
     res.json({
-        msg: 'preview',
+        msg: 'course updated',
+        courseId: course._id,
     })
 })
-adminRouter.get('/', (req, res) => {
+
+adminRouter.get('/', adminMiddleware, async (req, res) => {
+    const adminId = req.userId
+    const courses = await courseModel.find({
+        creatorId: adminId,
+    })
     res.json({
-        msg: 'preview',
+        msg: 'courses',
+        courses,
     })
 })
 

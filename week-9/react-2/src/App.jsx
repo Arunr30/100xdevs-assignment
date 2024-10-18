@@ -3,43 +3,46 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 function App() {
-    const[visible, setVisible] = useState(true)
-    useEffect(function() {
-        setInterval(() => {
-            setVisible(c => !c)
-        }, 5000)
-    }, [])
-  
-  return (
-    // conditional rendering
-    <>
-    {visible && <Counter />}
-    </>
-  )
-}
 
-function Counter() {
     const[count, setCount] = useState(0)
-    useEffect(()=> {
-        // mountion, side effects!
-        let clock = setInterval(() => {
-            console.log("mounted!")
-            setCount(count => count + 1)
-        }, 1000)
+    const[count1, setCount1] = useState(0)
 
-        // unmounting/ cleanup!
+    function increaseCount() {
+        setCount(c => c + 1)
+    }
+    function decreaseCount() {
+        setCount1(c => c - 1)
+    }
+    return (
+        <div>
+            <Counter count = {count} count1 = {count1}/>
+            <button onClick={increaseCount}>Increase</button>
+            <button onClick={decreaseCount}>Decrease</button>
+        </div>
+    )
+    
+}
+// mounting, un mounting, re rendering! --> life cycle events!
+
+function Counter(props){
+    useEffect(function() {
+        // mount
+        console.log("mount!")
+
         return function() {
-            console.log("unmounted!");
-            clearInterval(clock)
+            console.log("unmount!")
         }
     }, [])
-  
-    return(
-        <>
-        <h1> count is  {count}</h1>     
-        </>
+
+    useEffect(function() {
+        console.log("count has changed!")
+    }, [props.count])
+    return (
+        <div>
+            <h1>Counter {props.count}</h1>
+            <h1>Counter2 {props.count1}</h1>
+        </div>
     )
 }
-
 
 export default App

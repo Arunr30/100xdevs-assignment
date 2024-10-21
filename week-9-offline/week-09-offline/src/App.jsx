@@ -1,39 +1,69 @@
 function App() {
   return (
-    <div style={{ background }}>
-      <PostComponent />
+    <div
+      style={{
+        background: 'gray',
+        height: '100vh',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          margin: 20,
+          gap: 10,
+        }}
+      >
+        <div>
+          <div>
+            <PostComponent />
+          </div>
+          <br />
+          <div>
+            <PostComponent />
+          </div>
+          <br />
+          <div>
+            <PostComponent />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
-
-const style = { width: 200, backgroundColor: 'white', display: 'flex', gap: 10 }
 
 function PostComponent() {
   return (
-    <div>
-      <div style={style}>
+    <div
+      style={{
+        background: 'white',
+        width: 200,
+        borderWidth: 1,
+        height: 100,
+        borderRadius: 10,
+        padding: 20,
+      }}
+    >
+      <div style={{ display: 'flex ' }}>
         <img
-          src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png"
-          alt="github logo"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAHXPluq6GtTRPDIHRv5kJPy86uFjp5sO7hg&s"
+          alt=""
           style={{
-            width: 20,
-            height: 20,
+            width: 30,
+            height: 30,
             borderRadius: 20,
           }}
         />
-        <div>
-          <b>github</b>
-        </div>
-        <div>
-          23,000 followers
-          <div>12m</div>
+        <div style={{ marginLeft: 20, fontSize: 10 }}>
+          <b>100x devs</b>
+          <div>23k followers</div>
+          <div>21m</div>
         </div>
       </div>
 
-      <div style={{ fontSize: 20, marginTop: 20 }}>
-        want to know how to win bounties? won around $60000 bounties
-      </div>
+      <div>wanna know how this peoples won bounties? join us</div>
     </div>
   )
 }
+
 export default App

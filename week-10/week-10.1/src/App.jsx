@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
-  const timer = useRef()
+  let timer = useRef()
   function startCount() {
     let value = setInterval(() => {
       setCount((c) => c + 1)

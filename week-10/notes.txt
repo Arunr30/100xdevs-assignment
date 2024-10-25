@@ -60,3 +60,67 @@ function App() {
 }
 
 export default App
+
+
+this is how we are doing with use state stop watch
+
+import { useRef, useState } from 'react'
+import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom'
+
+function App() {
+  const [count, setCount] = useState(0)
+  const [timer, setTimer] = useState(1)
+  function startCount() {
+    let value = setInterval(() => {
+      setCount((c) => c + 1)
+    }, 1000)
+    setTimer(value)
+  }
+
+  function stopCount() {
+    clearInterval(timer)
+  }
+  return (
+    <div>
+      {count}
+      <button onClick={startCount}>start</button>
+      <button onClick={stopCount}>stop</button>
+    </div>
+  )
+}
+
+export default App
+
+
+but here it re renders every time when re render but we want to,
+so we can use ref!
+
+
+using use ref!
+
+import { useRef, useState } from 'react'
+import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom'
+
+function App() {
+  const [count, setCount] = useState(0)
+  let timer = useRef()
+  function startCount() {
+    let value = setInterval(() => {
+      setCount((c) => c + 1)
+    }, 1000)
+    timer.current = value
+  }
+
+  function stopCount() {
+    clearInterval(timer.current)
+  }
+  return (
+    <div>
+      {count}
+      <button onClick={startCount}>start</button>
+      <button onClick={stopCount}>stop</button>
+    </div>
+  )
+}
+
+export default App

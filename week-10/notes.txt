@@ -1,0 +1,62 @@
+<BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/neet/class-11" element={<Class11 />} />
+            <Route path="/neet/class-12" element={<Class12 />} />
+            <Route path="/" element={<Index />} />
+            <Route path="*" element={<ErrorPage />}></Route>
+          </Route>
+        </Routes>
+        Footer
+      </BrowserRouter>
+
+
+      function Header() {
+  return (
+    <div>
+      <Link to={'/neet/class-11'}>Class 11</Link>
+      <Link to={'/neet/class-12'}>Class 12</Link>
+      <Link to={'/'}>Allen</Link>
+    </div>
+  )
+}
+function ErrorPage() {
+  return (
+    <div>
+      <h1>sorry page not loaded</h1>
+    </div>
+  )
+}
+function Class11() {
+  return <div>hello from class 11</div>
+}
+
+function Class12() {
+  return <div>hello from class 12</div>
+}
+
+function Index() {
+  return <div>home page</div>
+}
+
+// use ref
+'
+import { useRef } from 'react'
+import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom'
+
+function App() {
+  const inputref = useRef()
+  function input() {
+    inputref.current.focus()
+  }
+  return (
+    <div>
+      Signup
+      <input ref={inputref} type="text" />
+      <input type="text" />
+      <button onClick={input}>SUBMIT</button>
+    </div>
+  )
+}
+
+export default App

@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
-function App() {
+const App = () => {
   return (
-    <>
+    <div>
       <LightBulb />
-    </>
+    </div>
   )
 }
 
 const LightBulb = () => {
-  const [bulbOn, setBulbOn] = useState(true)
+  const [bulbOn, setBulbOn] = useState(false)
   return (
     <div>
       <BulbState bulbOn={bulbOn} />
@@ -19,7 +19,7 @@ const LightBulb = () => {
 }
 
 const BulbState = ({ bulbOn }) => {
-  return <div>{bulbOn ? 'bulb on' : 'bulb off'}</div>
+  return <div>{bulbOn ? 'Turn on' : 'Turn off'}</div>
 }
 
 const ToggleState = ({ setBulbOn }) => {
@@ -28,7 +28,7 @@ const ToggleState = ({ setBulbOn }) => {
   }
   return (
     <div>
-      <button onClick={toggle}>Toggle</button>
+      <button onClick={toggle}>toggle</button>
     </div>
   )
 }

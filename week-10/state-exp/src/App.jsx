@@ -9,8 +9,8 @@ const BulbProvider = ({ children }) => {
     <div>
       <Context.Provider
         value={{
-          bulbOn: bulbOn,
-          setBulbOn: setBulbOn,
+          bulbOn,
+          setBulbOn,
         }}
       >
         {children}

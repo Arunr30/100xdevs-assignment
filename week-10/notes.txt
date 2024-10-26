@@ -125,3 +125,97 @@ function App() {
 
 export default App
 
+
+
+
+// light bulb..
+function App() {
+  return (
+    <>
+      <LightBulb />
+    </>
+  )
+}
+
+const LightBulb = () => {
+  const [bulbOn, setBulbOn] = useState(true)
+  return (
+    <div>
+      <BulbState bulbOn={bulbOn} />
+      <ToggleState bulbOn={bulbOn} setBulbOn={setBulbOn} />
+    </div>
+  )
+}
+
+const BulbState = ({ bulbOn }) => {
+  return <div>{bulbOn ? 'bulb on' : 'bulb off'}</div>
+}
+
+const ToggleState = ({ setBulbOn }) => {
+  function toggle() {
+    setBulbOn((currentState) => !currentState)
+  }
+  return (
+    <div>
+      <button onClick={toggle}>Toggle</button>
+    </div>
+  )
+}
+
+
+what is prop drilling?
+
+prop drilling is just defining a state variable in a parent comp. and getting into the child comp.
+it can leads to complexity of code.
+
+how we fixing this?
+through context api.
+context api has 3 jargons. they are.,
+
+context -> initialising context
+provider -> providing
+consumer -> consuming 
+
+1. context
+how to create a context.?
+first we have to import it.
+then we have to create a context,, 
+
+const context = createContext()
+
+2.provider
+
+provide, we have wrap up through provider
+
+<context.Provider>
+
+</context.provider>
+
+3. consumer
+
+
+that provider gives the whole object, so we have to destructure it.
+
+const {des.obj} = useContext(context)  ==> we use context.,
+ 
+
+example code.. for context and custom context.,
+
+const Context = createContext()
+
+const BulbProvider = ({ children }) => {
+  const [bulbOn, setBulbOn] = useState(false)
+  return (
+    <div>
+      <Context.Provider
+        value={{
+          bulbOn: bulbOn,
+          setBulbOn: setBulbOn,
+        }}
+      >
+        {children}
+      </Context.Provider>
+    </div>
+  )
+}
+

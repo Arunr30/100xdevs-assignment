@@ -2,54 +2,70 @@ import { createContext } from 'react'
 import './App.css'
 import { useState } from 'react';
 import { useContext } from 'react';
-const Context = createContext();
+import { counter } from './store/atoms/count';
+import { useRecoilValue, RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
 
 
-function CountContext({children}) {
-    const[count, setCount] = useState(0)
-    return (
-      <Context.Provider value={{count, setCount}}>
-        {children}
-      </Context.Provider>
-    )
+// const Context = createContext();
+
+
+// function CountContext({children}) {
     
-  }
+//     return (
+//       <Context.Provider value={{count, setCount}}>
+//         {children}
+//       </Context.Provider>
+//     )
+    
+//   }
+
+const App = () => {
+  return <RecoilRoot>
+    <Parent />
+  </RecoilRoot>
+   
+}
+
 
 function Parent() {
 
   return (
     <>
      <h1>
-      <CountContext>
         <CountValue />
-          <Increase />
-          <Decrease />
-      </CountContext>  
+        <Increase />
+        <Decrease /> 
      </h1>
     </>
   )
 }
 
 const Increase = () => {
-  const {count, setCount} = useContext(Context)
-  return <button onClick={() => setCount(count + 1)}>Increase</button>
+  const setCount = useSetRecoilState(counter)
+  function increase() {
+    setCount(c => c + 1)
+  }
+  return <button onClick={increase}>Increase</button>
 }
 
 const Decrease = () => {
-  const {count, setCount} = useContext(Context)
-  return <button onClick={() => setCount(count - 1)}>Increase</button>
+  const setCount = useSetRecoilState(counter)
+  function decrease() {
+    setCount(c => c - 1)
+  }
+  return <button onClick={decrease}>Increase</button>
 }
 
 const CountValue = () => {
-  const {count} = useContext(Context)
-  return <h1>count: {count}</h1>
+  const count = useRecoilValue(counter)
+
+  return <div>
+      count: {count}
+  </div>
+  
 }
 
-const App = () => {
-  return <div>
-    <Parent />
-  </div>
-}
+
 export default App
 
 

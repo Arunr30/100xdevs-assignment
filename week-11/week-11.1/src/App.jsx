@@ -1,35 +1,42 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react";
 
 
+const useDebouce = (value, delay) => {
+  const[debounceVal, setDebounceVal] = useState(value);
+  
+  
+  useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebounceVal(value)
+      }, delay)
+    
+      return () => {
+        clearTimeout(handler)
+      } 
+    },[value, delay])
 
-// custom hook,
+  return debounceVal
+} 
 
-function useCounter(){
-  const[count, setCount] = useState(1)
-  function increasebtn() {
-    setCount(c => c + 1)
-  }
-  function decreasebtn() {
-    setCount(c => c - 1)
-  }
 
-  return {
-    count,
-    increasebtn,
-    decreasebtn
-  }
-}
 
 function App() {
-  const {count, increasebtn, decreasebtn} = useCounter()
+  const[inputVal, setInputVal] = useState("")
+  const deBouncedValue = useDebouce(inputVal, 200)
 
+  function change(e) {
+    setInputVal(e.target.value)
+  }
+
+  useEffect(() => {
+    console.log("expensive operation");
+    
+  },[deBouncedValue])
   return (
-    <>
-      {count}
-      <button onClick={increasebtn}>increase</button>
-      <button onClick={decreasebtn}>decrease</button>
-    </>
-  )
+    <div>
+      <input type="text" onChange={change} />
+    </div>
+  );
 }
 
-export default App
+export default App;

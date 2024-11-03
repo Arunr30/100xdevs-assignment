@@ -1,9 +1,7 @@
-import { createContext } from 'react'
+
 import './App.css'
-import { useState } from 'react';
-import { useContext } from 'react';
-import { counter } from './store/atoms/count';
-import { useRecoilValue, RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
+import { counter, evenCounter } from './store/atoms/count';
+import { useRecoilValue, RecoilRoot, useSetRecoilState } from 'recoil';
 
 
 // const Context = createContext();
@@ -19,52 +17,54 @@ import { useRecoilValue, RecoilRoot, useRecoilState, useSetRecoilState } from 'r
     
 //   }
 
+
+
+
 const App = () => {
-  return <RecoilRoot>
-    <Parent />
-  </RecoilRoot>
-   
-}
-
-
-function Parent() {
-
   return (
-    <>
-     <h1>
-        <CountValue />
-        <Increase />
-        <Decrease /> 
-     </h1>
-    </>
+    <div>
+      <RecoilRoot>
+        <Buttons />
+        <Counter />
+        <IsEven />
+      </RecoilRoot>
+    </div>
   )
 }
 
-const Increase = () => {
-  const setCount = useSetRecoilState(counter)
-  function increase() {
-    setCount(c => c + 1)
-  }
-  return <button onClick={increase}>Increase</button>
-}
 
-const Decrease = () => {
+const Buttons = () => {
   const setCount = useSetRecoilState(counter)
+
+  function increase() {
+    setCount(c => c + 2)
+
+  }
   function decrease() {
     setCount(c => c - 1)
+    
   }
-  return <button onClick={decrease}>Increase</button>
+  return(
+    <div>
+      <button onClick={increase}>Increase</button>
+      <button onClick={decrease}>Decrease</button>
+    </div>
+  )
 }
 
-const CountValue = () => {
+const Counter = () => {
   const count = useRecoilValue(counter)
-
   return <div>
-      count: {count}
+    {count}
   </div>
-  
 }
 
+const IsEven = () => {
+  const isEven = useRecoilValue(evenCounter)
+  return <div>
+    {isEven ? "even" : "odd"}
+  </div>
+}
 
 export default App
 

@@ -124,10 +124,3 @@ adminRouter.get('/', adminMiddleware, async (req, res) => {
 module.exports = {
     adminRouter: adminRouter,
 }
-
-// 6700bd03a1d4850d828fe9ea
-
-//6700db4013afcc81a2b73c14 --> course id
-
-// 6700dd6b6a803ed35a019977 --> new course id
-// 6700fb7382000fcb438b89ac

@@ -1,26 +1,21 @@
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
-const Practice = () => {
-  const [count, setCount] = useState(0)
-  const [color, setColor] = useState('green')
-  useEffect(() => {
-    document.title = `count: ${count} ${color}`
-  }, [count, color])
+const Context = createContext()
 
-  function addCount() {
-    setCount((c) => c + 1)
-  }
-  function change() {
-    setColor(color === 'green' ? 'red' : 'green')
-  }
-
+const PracticeProvider = ({ children }) => {
+  const [state, setState] = useState(0)
   return (
     <div>
-      <p style={{ color: color }}>count: {count}</p>
-      <button onClick={addCount}>Add</button>
-      <button onClick={change}>Change</button>
+      <Context.Provider
+        value={{
+          state,
+          setState,
+        }}
+      >
+        {children}
+      </Context.Provider>
     </div>
   )
 }
 
-export default Practice
+export default PracticeProvider

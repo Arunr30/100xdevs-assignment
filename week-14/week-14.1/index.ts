@@ -1,6 +1,16 @@
-function sum(a:number, b: number) {
-  return a + b
+interface studentType {
+  name: string,
+  mark: number
 }
 
-let a = sum(1, 3)
-console.log(a)
+function student(user: studentType) {
+  console.log("student name is " + user.name + "mark is " + user.mark)
+}
+
+let user: studentType = {
+  name: "arun",
+  mark: 22
+}
+
+student(user)
+

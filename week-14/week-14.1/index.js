@@ -1,6 +1,9 @@
 "use strict";
-function sum(a, b) {
-    return a + b;
+function student(user) {
+    console.log("student name is " + user.name + "mark is " + user.mark);
 }
-let a = sum(1, 3);
-console.log(a);
+let user = {
+    name: "arun",
+    mark: 22
+};
+student(user);

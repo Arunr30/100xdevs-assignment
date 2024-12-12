@@ -1,9 +1,20 @@
 "use strict";
-function student(user) {
-    console.log("student name is " + user.name + "mark is " + user.mark);
+// type User = {
+//   name: string;
+//   age: number;
+// }
+function filterUser(user) {
+    return user.filter((x) => x.age >= 18);
 }
-let user = {
-    name: "arun",
-    mark: 22
-};
-student(user);
+console.log(filterUser([
+    {
+        firstName: "arun",
+        lastName: "vasu",
+        age: 1
+    },
+    {
+        firstName: "bla",
+        lastName: "bla",
+        age: 23
+    }
+]));

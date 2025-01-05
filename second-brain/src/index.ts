@@ -31,8 +31,25 @@ app.post('/api/v1/signup', async (req, res) => {
   })
 })
 
-app.post('/api/v1/signup', (req, res) => {
+app.post('/api/v1/signin', async (req, res) => {
+  const {username, password} = req.body
+  try {
+    const user = await userModel.findOne(username);
+    if(!user) {
+      res.send({
+        msg: "no user"
+      })
+    }
+    const isPasswordMatch = await bcrypt.compare(password, user?.password)
+    if(!isPasswordMatch) {
+      res.send({
+        msg: 'incorrect password!!'
+      })
+    }
 
+  } catch (error) {
+    
+  }
 })
 
 app.post('/api/v1/content',(req, res) => {

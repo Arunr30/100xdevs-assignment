@@ -2,30 +2,47 @@ import { WebSocketServer, WebSocket } from "ws";
 
 const wss = new WebSocketServer({port: 3001})
 
+interface User {
+  socket: WebSocket,
+  room: string
+}
 let userCount = 0;
-let allSocket: WebSocket[] = []
+let allSocket: User[] = [];
 
 // when the new user got connected
-wss.on('connection', function(socket) {
-  allSocket.push(socket);
+wss.on('connection', (socket) => {
   userCount++;
-  console.log('user is connected: ', userCount)
-  // when the user sends a message 
-  socket.on('message', (message) => {
-    console.log('message recieved: ', message.toString());
-    for(let i = 0; i < allSocket.length; i++) {
-      const s = allSocket[i];
-      // server responds back with a message
-      s.send(message.toString() + ' message from server')
-    }
+  console.log('user connected');
+    socket.on('message', (message) => {
+      // @ts-ignore
+      const parsedMessage = JSON.parse(message)
+      if(parsedMessage === 'join') {
+        allSocket.push({
+          socket,
+          room: parsedMessage.payload.roomId
+        })
+      }
+      if(parsedMessage === 'chat') {
+        // const currentUserRoom = allSocket.find(x => x.socket === socket)?.room
+        let currentUserRoom = null;
+        for(let i = 0; i < allSocket.length; i++) {
+         if(allSocket[i].socket === socket) {
+          currentUserRoom = allSocket[i].room;
+         }
+        }
 
-    // for each..
-    // allSocket.forEach((socket) => {
-    //   socket.send(message.toString() + 'message from the servrer')
-    // })
+      }
+      allSocket.forEach(socket => {
+        // @ts-ignore
+        socket.send(parsedMessage.payload.roomId)
+      })
+    })
+
+  socket.on('close', () => {
+    // @ts-ignore
+    allSocket.filter(x => x != socket)
   })
 })
-
 
 
 

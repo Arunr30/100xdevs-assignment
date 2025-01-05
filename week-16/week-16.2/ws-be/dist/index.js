@@ -14,7 +14,7 @@ wss.on('connection', (socket) => {
                 room: parsedMessage.payload.roomId
             });
         }
-        if (parsedMessage.type == "chat") {
+        if (parsedMessage.type === "chat") {
             console.log('user wants to chat');
             // const currentUser = allUser.find(x => x.socket === socket)
             let currentUser = null;

@@ -49,3 +49,5 @@ class Animal {
 
 const dog = new Animal("Dog", "Woof");
 console.log(dog.makeSound());
+
+

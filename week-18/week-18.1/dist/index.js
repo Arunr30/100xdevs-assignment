@@ -16,9 +16,16 @@ function main() {
         const user = yield client.user.findFirst({
             where: {
                 id: 1
+            },
+            include: {
+                todo: true
             }
         });
         console.log(user);
     });
 }
 main();
+// findfirst --> read
+// delete --> delete,  where:{}
+// create --> create
+// update --> update, where:{}

@@ -6,6 +6,9 @@ async function main() {
   const user = await client.user.findFirst({
     where: {
       id: 1
+    },
+    include: {
+      todo: true
     }
   })
   console.log(user)

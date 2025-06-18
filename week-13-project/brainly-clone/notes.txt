@@ -6,6 +6,13 @@ steps to initialize typescript backend
 -- npm install express
 -- npm install @types/express
 
+to start node js/ts app
+
+scripts: {
+    build: tsc -b
+    start: dist/index.js
+    dev: npm run build && npm run start
+}
 
 change outDir to src, rootDir to dist.
 

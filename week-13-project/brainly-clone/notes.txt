@@ -1,0 +1,13 @@
+steps to initialize typescript backend
+
+-- npm init -y
+-- npm install -d typescript
+-- npx tsc --init
+-- npm install express
+-- npm install @types/express
+
+
+change outDir to src, rootDir to dist.
+
+npm --> installing package
+npx --> using package without installing
